@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+        {% for name in names %}
+            {% if not name ==  'jhon' %}
+                <p>{{name}}</p>
+            {% endif %}
+            {{ count|add:1 }}
+        {% endfor %}
+
+    {% with a=10 %}
+    <div>value of a :{{a}}</div>
+    {% endwith %}
+    {{count}}
+
+    
+</body>
+</html>
