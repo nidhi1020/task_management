@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-zhu=hms1l0z2h3d&3g7-v_v#sq*x@-x2%m*@k8y^_z#iaa4(m)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com', 'http://127.0.0.1:8000']
 
 
 # Application definition
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tasks',
     'users',
-    "debug_toolbar",
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ MIDDLEWARE = [
 
 INTERNAL_IPS = [
     # ...
-    "127.0.0.1",
+    '127.0.0.1',
     # ...
 ]
 
@@ -150,3 +151,10 @@ STATICFILES_DIRS=[
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8000",   # For local development
+    "https://127.0.0.1:8000",  # If you're using HTTPS locally
+    "https://yourdomain.com",  # Your production domain
+]

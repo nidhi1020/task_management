@@ -12,30 +12,33 @@
                 <div>CREATED AT</div>
             </div>
             <!-- task-items -->
+            {% for task in tasks %}
             <div class="divide-y divide-gray-100 ">
                 <div class="grid grid-cols-4 p-4 gap-4 items-center">
                     <div class="flex items-center gap-2">
                         <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <div> 
-                            <span>
-                                Test Low task
-                            </span>
+                        <div>               
+                            <span>{{task.title}}</span>
+                            <a href='{% url "update-task" task.id %}' class="px-2 py-1 bg-green-500">Edit</a>
+                            <form action="{% url "delete-task" task.id %}" method='POST'>{% csrf_token %}<button type='Submit' class="px-2 py-1 bg-red-500">Delete</button></form>
                         </div>
                     </div>
                     <div>
-                        <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm">Low</span>
+                        <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm">{{task.details.get_priority_display}}</span>
                     </div>
                     <div>
                         <div class="flex -space-x-2">
-                            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">CA</div>
-                            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">JS</div>
-                            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">B</div>
+                            {% for emp in task.assigned_to.all %}
+                            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm border-2 border-white">{{emp.name|slice:':1'}}</div>
+                            {% endfor %}
+                            
                         </div>
                     </div>
                     <div>
-                        <span class="text-gray-500">9 Months Ago</span>
+                        <span class="text-gray-500">{{task.created_at|timesince}}</span>
                     </div>
                     </div>
+            {% endfor %}
             </div>
             <div class="divide-y divide-gray-100 ">
                 <div class="grid grid-cols-4 p-4 gap-4 items-center">
